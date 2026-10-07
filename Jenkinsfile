@@ -1,44 +1,18 @@
-pipeline {
-    agent any
+[Pipeline] stage
+[Pipeline] { (Test)
 
-    stages {
++ test -f missing.html
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+ERROR: script returned exit code 1
 
-        stage('Test') {
-            steps {
-                sh 'test -f index.html'
-                echo 'HTML file exists - Test passed'
-            }
-        }
+[Pipeline] stage
+[Pipeline] { (Build)
 
-        stage('Build') {
-            steps {
-                echo 'Preparing HTML application...'
-                sh 'mkdir -p build'
-                sh 'cp index.html build/'
-            }
-        }
+Stage "Build" skipped due to earlier failure(s)
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying HTML application...'
-                echo 'HTML application deployed successfully!'
-            }
-        }
-    }
+[Pipeline] stage
+[Pipeline] { (Deploy)
 
-    post {
-        success {
-            echo 'HTML application deployed successfully!'
-        }
+Stage "Deploy" skipped due to earlier failure(s)
 
-        failure {
-            echo 'Pipeline failed!'
-        }
-    }
-}
+Finished: FAILURE
